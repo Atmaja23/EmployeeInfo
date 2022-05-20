@@ -1,0 +1,111 @@
+<div class="card">
+    <div class="card-header">
+        Update employee information
+    </div>
+    <div class="card-body">
+        <form name="EmployeeForm" (ngSubmit)="onSubmit()" #EmpForm="ngForm">
+            <div class="form-group">
+                <label for="Id">Employee Id</label>
+                <input type="text" class="form-control" id="Id"
+                required  [readonly]="true"
+                [(ngModel)]="employee.employeeId" name="Id" > 
+                
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name"
+                required minlength="3"
+                [(ngModel)]="employee.employeeName" name="name" #employeeName= "ngModel"> 
+                <div [hidden]="employeeName.valid || employeeName.pristine" 
+                class="alert alert-danger">
+                    <div *ngIf="employeeName.errors?.['required']">
+                        Employee Name is required
+                    </div>   
+                    <div *ngIf="employeeName.errors?.['minlength']">
+                        Employee Name must be atleast 3 charaters long
+                    </div>         
+                </div>
+            </div>
+            <div class="form-group">
+                
+                <label for="department"> Department</label>
+                <br>
+                <select name="department" id="department"
+                [(ngModel)]="employee.employeeDepartment">
+                    
+                    <option value="Research and development">Research and development</option>
+                    <option value="Learning and development">Learning and development</option>
+                    <option value="Product development">Product development</option>
+                    <option value="HR">HR</option>
+                    <option value="Security and transport.">Security and transport.</option>
+                    <option value="Sales and marketing">Sales and marketing</option>
+                    <option value="Accounts and Finance">Accounts and Finance</option>
+                    <option value="IT services">IT services</option>
+                    
+                  </select>
+                <br>
+            </div>
+            <div class="form-group">
+                <label for="contactNumber">Contact Number</label>
+                <input type="text" class="form-control" id="contactNumber"
+                required minlength="10"
+                [(ngModel)]="employee.employeeContactNumber" name="contactNumber" #number="ngModel">
+                <div [hidden]="number.valid || number.pristine" 
+                class="alert alert-danger">
+                    <div *ngIf="number.errors?.['required']">
+                        Employee contact number is required
+                    </div>   
+                    <div *ngIf="number.errors?.['minlength']">
+                        Employee contact number must be of 10 digits
+                    </div>         
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="address"
+                required minlength="3"
+                [(ngModel)]="employee.employeeAddress" name="address" #empAddress="ngModel">
+                <div [hidden]="empAddress.valid || empAddress.pristine" 
+                class="alert alert-danger">
+                    <div *ngIf="empAddress.errors?.['required']">
+                        Employee address is required
+                    </div>   
+                    <div *ngIf="empAddress.errors?.['minlength']">
+                        Employee address must be atleast 3 charaters long
+                    </div>         
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="doj">Date Of Joining</label>
+                <input type="date" class="form-control" id="doj"
+                required
+                [(ngModel)]="employee.dateOfJoining" name="doj" #DOJ="ngModel">
+                <div [hidden]="DOJ.valid || DOJ.pristine" 
+                class="alert alert-danger">
+                  Employee date Of joining is required
+                </div>
+                
+            </div>
+            <div class="form-group">
+                <label for="email">Email Id</label>
+                <input type="email" class="form-control" id="email" 
+                required email="true"
+                [(ngModel)]="employee.employeeEmailId" name="email" #empEmail="ngModel">
+                <div [hidden]="empEmail.valid || empEmail.pristine" 
+                class="alert alert-danger">
+                    <div *ngIf="empEmail.errors?.['required']">
+                        Employee Email Id is required
+                    </div>   
+                    <div *ngIf="empEmail.errors?.['email']">
+                        Employee Email Id is not valid
+                    </div>         
+                </div>
+                <br>
+            </div>
+            <pre>
+            <button type="submit" class="btn btn-warning" [disabled]="!EmpForm.form.valid"> Update Employee </button>   <button type="button" class="btn btn-danger"
+                [routerLink] = "['/employees']">Cancel</button>
+            </pre>
+        </form>
+    </div>
+</div>
